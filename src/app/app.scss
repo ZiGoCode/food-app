@@ -1,0 +1,77 @@
+
+.tabbar a[aria-selected=true] {
+    border-top: 1px;
+    border-style: solid;   
+    color: #FF6C00 !important;
+}
+.tab-button[aria-selected=true] .tab-button-icon {
+    color: #FF6C00 !important;
+}
+
+.tabs-bg a[aria-selected=true]{
+    border-top: 1px;
+    border-style: solid;   
+    color: #00635a !important;
+}
+.tabs-bg .tab-button[aria-selected=true] .tab-button-icon {
+    color: #00635a !important;
+}
+
+ion-navbar{ 
+    //  text-align: center;
+    // background-color: #ff4500;
+    // color: #ff4500;
+    .title.title-md {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        height: 100%;
+        width: 70%;
+        text-align: center;
+    }
+}
+ion-header{
+    .back-button-md,
+    .back-button-ios {
+        color: #ffffff;
+    }
+}
+.toolbar-background {
+    background-color: #f4f4f4;
+  }
+
+@font-face {
+    font-family: 'RSU_Regular';
+    src: url('../assets/fonts/RSU_Regular.ttf') 
+}
+.fontRSU{
+    font-family: RSU_Regular;
+}
+
+ion-icon {
+    &[class*="custom-"] {
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1em;
+      height: 1em;
+    }
+  
+    &[class*="custom-mobile"] {
+      mask-image: url(../assets/imgs/new-product-sticker.svg);
+    }
+    &[class*="custom-food"] {
+        mask-image: url(../assets/imgs/foodicon.png);
+    }
+    &[class*="custom-cart"] {
+        mask-image: url(../assets/icon/online-shopping-cart.svg);
+    }
+    &[class*="custom-settings"] {
+        mask-image: url(../assets/icon/settings.svg);
+    }
+    &[class*="custom-shop"] {
+        mask-image: url(../assets/icon/icon.svg);
+    }
+}

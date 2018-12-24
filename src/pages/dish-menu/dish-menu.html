@@ -46,11 +46,13 @@
     </ion-row>
 </ion-content>
 
-<ion-footer>
+<ion-footer no-border>
     <div class="col-cout">
-        <span class="fontRSU">ราคารวม : </span>{{ cout }}<samp class="fontRSU"> บาท</samp>
+        <span ion-text color="dark2" class="fontRSU">ราคา : </span>
+        <span ion-text color="danger2">{{ cout }}</span>
+        <samp ion-text color="dark2" class="fontRSU"> บาท</samp>
     </div>
-    <ion-toolbar class="footer-size">
+    <ion-toolbar color="light2" class="footer-size">
         <ion-row class="row-footer">
 
             <ion-col no-padding no-margin col-2 class="col-bg1" (click)="onRemove()">

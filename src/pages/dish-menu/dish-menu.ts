@@ -4,6 +4,7 @@ import { Dish } from '../../firebase/dish';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs';
+import { Buy } from '../../firebase/buy';
 
 
 @IonicPage()
@@ -47,7 +48,7 @@ export class DishMenuPage {
         console.log(dishMenu);
         this.angularFireAuth.authState.take(1).subscribe(data => {
             dishMenu.price = this.cout
-            const menu = {} as Dish;
+            const menu = {} as Buy;
             menu.title = this.dishMenu.title;
             menu.ingredients = this.dishMenu.ingredients;
             menu.type = this.dishMenu.type;

@@ -22,14 +22,15 @@ export class OpenPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,private angularFireAuth: AngularFireAuth,
     private angularFireDatabase: AngularFireDatabase,public actionsheetCtrl: ActionSheetController,
     public appCtrl: App) {
+
     this.angularFireAuth.authState.take(1).subscribe(data => {
-      // this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).valueChanges();
       this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).snapshotChanges().map(caches => {
         return caches.map(c => ({
           key: c.payload.key, ...c.payload.val()
         }));
       });
     });
+    
   }
 
   ionViewDidLoad() {

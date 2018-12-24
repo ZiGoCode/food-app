@@ -13,56 +13,60 @@ import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
-  selector: 'page-my-profile',
-  templateUrl: 'my-profile.html',
+    selector: 'page-my-profile',
+    templateUrl: 'my-profile.html',
 })
 export class MyProfilePage {
 
-  profileData: Observable<any>;
+    profileData: Observable<any>;
 
-  constructor(private angularFireAuth: AngularFireAuth,
-    private angularFireDatabase: AngularFireDatabase,
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    public appCtrl: App,
-    public alertCtrl: AlertController) {
+    constructor(private angularFireAuth: AngularFireAuth,
+        private angularFireDatabase: AngularFireDatabase,
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public appCtrl: App,
+        public alertCtrl: AlertController) {
 
-    this.angularFireAuth.authState.subscribe(data =>{
-      this.profileData = this.angularFireDatabase.object(`user/${data.uid}`).valueChanges();
-    })
+        this.angularFireAuth.authState.subscribe(data => {
+            this.profileData = this.angularFireDatabase.object(`user/${data.uid}`).valueChanges();
+        })
 
-  }
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyProfilePage');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad MyProfilePage');
+    }
 
-  logout(){
-    let alert = this.alertCtrl.create({
-      title: 'ลงชื่อออก',
-      message: 'คุณต้องการยืนลงชื่อออกจากระบบหรือไม่',
-      buttons: [
-          {
-              text: 'ยกเลิก',
-              role: 'cancel',
-              handler: () => {
-              }
-          },
-          {
-              text: 'ตกลง',
-              handler: () => {
-                  // localStorage.removeItem('userData')
-                  localStorage.removeItem('userData')
-                  this.appCtrl.getRootNav().setRoot('LoginPage');
-              }
-          }
-      ]
-  })
-  alert.present()
-  }
+    logout() {
+        let alert = this.alertCtrl.create({
+            title: 'ลงชื่อออก',
+            message: 'คุณต้องการยืนลงชื่อออกจากระบบหรือไม่',
+            buttons: [
+                {
+                    text: 'ยกเลิก',
+                    role: 'cancel',
+                    handler: () => {
+                    }
+                },
+                {
+                    text: 'ตกลง',
+                    handler: () => {
+                        // localStorage.removeItem('userData')
+                        localStorage.removeItem('userData')
+                        this.appCtrl.getRootNav().setRoot('LoginPage');
+                    }
+                }
+            ]
+        })
+        alert.present()
+    }
 
-  open(){
-    this.appCtrl.getRootNav().push('TabsRtrPage',{},{animate: true, direction: 'back'});
-  }
+    open() {
+        this.appCtrl.getRootNav().push('TabsRtrPage', {}, { animate: true, direction: 'back' });
+    }
+
+    onCart() {
+        this.appCtrl.getRootNav().push('BuyPage', {}, { animate: true, direction: 'forward' })
+    }
 
 }

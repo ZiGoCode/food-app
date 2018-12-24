@@ -74,4 +74,37 @@ ion-icon {
     &[class*="custom-shop"] {
         mask-image: url(../assets/icon/icon.svg);
     }
+    &[class*="custom-open"] {
+        mask-image: url(../assets/icon/open.svg);
+    }
+    &[class*="custom-shop"] {
+        mask-image: url(../assets/icon/shop.svg);
+    }
+    &[class*="custom-addcart"] {
+        mask-image: url(../assets/icon/shopping-cart-add-button.svg);
+    }
+    &[class*="custom-table"] {
+        mask-image: url(../assets/icon/table.svg);
+    }
+    
+}
+.text-c{
+    height: 30px;
+    font-size: 12px;
+    color: #757575;
+}
+ion-searchbar{
+    caret-color: #fff;
+}
+.buts-maging{
+    margin-right: 7px !important;
+}
+.text-a{
+    font-size: 12px !important;
+}
+.slider-pager {
+    .swiper-pagination-bullet {
+      background: #fff;
+      // margin: 0 3px;
+    }
 }

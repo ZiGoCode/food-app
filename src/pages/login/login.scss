@@ -1,30 +1,58 @@
 page-login {
     ion-input { 
-        border-bottom: black solid 1px;
+        border-bottom: #fff solid 1px;
     }  
     ion-datetime {
-        border-bottom: black solid 1px;
+        border-bottom: #fff solid 1px;
     } 
+    ion-input{
+        color: #fff !important;
+        caret-color: #fff;
+    }
+    ion-label{
+        color: #fff !important;
+    }
+    ion-datetime{
+        color: #fff !important;
+    }
+    .margin-img{
+        margin-top: 20px !important;
+    }
+    .card-padding{
+        margin-top: 0 !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+    .padding-top{
+        padding-top: 5px;
+    }
+    .dark2{
+        color: #fff;
+    }
 }
 
 .bg-style{
+    margin: 0px !important;
     // background-image: url("../../assets/imgs/Moon.png");
     // background-image: url("../../assets//imgs/background-image.png");
     // background-repeat: no-repeat; 
     // background-size: cover;  
     // background-position: center;  
     // background-color: #FF6C00; 
-    background-color: #fff;  
+    background-color: #ff6600;  
 } 
 .card-background-page {
     // background: rgba(255, 255, 255, 0.6);
     box-shadow: none;
-        // background: rgba(26, 140, 255, 0.29);
+    background-color: #ff6600;
     border-radius: 10px;
     z-index: 100;
 }
 .card-title {
-    background: rgba(255, 255, 255, 0.9); 
+    background-color: #ff6600;
 } 
 .subtitle { 
     width: 250px;

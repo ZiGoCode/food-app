@@ -32,6 +32,7 @@ export class EditRestaurantPage {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController
   ) {
+    
     this.restaurant = this.navParams.get("item");
 
     this.angularFireAuth.authState.take(1).subscribe(data => {

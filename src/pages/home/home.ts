@@ -28,9 +28,7 @@ export class HomePage {
     { image: "../../assets/imgs/restaurants/restaurant12sq.jpg" }
   ];
 
-  data: Observable<any[]>;
-  items: any;
-  page: any[];
+  items: Observable<any[]>;
 
   constructor(
     public navCtrl: NavController,
@@ -38,26 +36,27 @@ export class HomePage {
     private angularFireDatabase: AngularFireDatabase,
     public appCtrl: App
   ) {
-    this.grtData();
+
+    this.items = this.angularFireDatabase.list(`restaurant`)
+      .snapshotChanges()
+      .map(caches => {
+        return caches.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val()
+        }));
+    });
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad HomePage");
+    console.log(this.items);
+
   }
 
-  grtData() {
-    this.data = this.angularFireDatabase.list(`restaurant`).valueChanges();
-    this.data.subscribe(data => {
-      this.items = data;
-    });
-  }
-
-
-
-  dishPage() {
+  dishPage(item) {
     this.appCtrl
       .getRootNav()
-      .push("DishPage", {}, { animate: true, direction: "forward" });
+      .push("DishPage", { item: item, dishKey: item.key}, { animate: true, direction: "forward" });
   }
 }
 

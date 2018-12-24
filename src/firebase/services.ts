@@ -11,9 +11,9 @@ export class Services {
 
     }
 
-    edit(restaurant: Restaurant) {
-        this.angularFireAuth.authState.take(1).subscribe(data => {
-            this.angularFireDatabase.list<Restaurant>(`restaurantID/${data.uid}`).update(restaurant.id, restaurant);
-        });
-    }
+    // edit(restaurant: Restaurant) {
+    //     this.angularFireAuth.authState.take(1).subscribe(data => {
+    //         this.angularFireDatabase.list<Restaurant>(`restaurantID/${data.uid}`).update(restaurant.key, restaurant);
+    //     });
+    // }
 }

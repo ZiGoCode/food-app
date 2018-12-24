@@ -18,29 +18,28 @@ import { FIREBASE_CONFIG } from '../firebase/firebase-config';
 
 
 @NgModule({
-  declarations: [
-    MyApp,
-    
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp,{
-      mode:'ios'
-    }),
-    AngularFireModule.initializeApp(FIREBASE_CONFIG),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
+    declarations: [
+        MyApp
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp, {
+            mode: 'ios'
+        }),
+        AngularFireModule.initializeApp(FIREBASE_CONFIG),
+        AngularFireAuthModule,
+        AngularFireDatabaseModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
 
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation
-  ]
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        ScreenOrientation
+    ]
 })
-export class AppModule {}
+export class AppModule { }

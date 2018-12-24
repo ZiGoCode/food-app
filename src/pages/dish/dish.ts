@@ -1,38 +1,57 @@
 import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
-
-/**
- * Generated class for the DishPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Restaurant } from "../../firebase/restaurant";
+import { AngularFireDatabase } from "angularfire2/database";
+import { Observable } from "rxjs";
 
 @IonicPage()
 @Component({
-  selector: "page-dish",
-  templateUrl: "dish.html"
+    selector: "page-dish",
+    templateUrl: "dish.html"
 })
 export class DishPage {
-  images: ImagsHome[] =[
-    {image: '../../assets/imgs/restaurants/restaurant10.jpg'},
-    {image: '../../assets/imgs/restaurants/restaurant07.jpg'},
-    {image: '../../assets/imgs/restaurants/restaurant06.jpg'},
-    {image: '../../assets/imgs/restaurants/restaurant05.jpg'},
-    {image: '../../assets/imgs/restaurants/restaurant08.jpg'},
-  ];
 
-  constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams
-  ) {
+    restaurant = {} as Restaurant;
+    dishKey: any;
+    images: ImagsHome[] = [
+        { image: '../../assets/imgs/restaurants/restaurant10.jpg' },
+        { image: '../../assets/imgs/restaurants/restaurant07.jpg' },
+        { image: '../../assets/imgs/restaurants/restaurant06.jpg' },
+        { image: '../../assets/imgs/restaurants/restaurant05.jpg' },
+        { image: '../../assets/imgs/restaurants/restaurant08.jpg' },
+    ];
+    dishMenu: Observable<any[]>;
 
-  }
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private angularFireDatabase: AngularFireDatabase
+    ) {
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad DishPage");
-  }
+        this.restaurant = this.navParams.get("item");
+        this.dishKey = this.navParams.get("dishKey")
+
+        this.dishMenu = this.angularFireDatabase.list(`restaurant/${this.dishKey}/dish`)
+            .snapshotChanges()
+            .map(caches => {
+                return caches.map(c => ({
+                    key: c.payload.key,
+                    ...c.payload.val()
+                }));
+            });
+    }
+
+    ionViewDidLoad() {
+        console.log("ionViewDidLoad DishPage");
+    }
+    onDish(item) {
+        this.navCtrl.push('DishMenuPage', { item: item });
+    }
+    onCart() {
+        this.navCtrl.push('BuyPage')
+    }
 }
+
 export interface ImagsHome {
-  image: string;
+    image: string;
 }

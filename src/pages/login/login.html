@@ -1,10 +1,10 @@
 <ion-content no-padding no-marging text-center class="bg-style">
-  <div no-padding no-marging>
-    <img src="../../assets/imgs/Logo3.png" class="subtitle">
+  <div no-padding class="margin-img">
+    <img src="../../assets/imgs/F2.png" class="subtitle">
   </div>
-  <ion-card class="card-background-page">
+  <ion-card class="card-background-page card-padding">
     <ion-card-header>
-      <ion-segment color="danger2" [(ngModel)]="pet">
+      <ion-segment color="light2" [(ngModel)]="pet">
         <ion-segment-button value="login">
           Login
         </ion-segment-button>
@@ -14,13 +14,13 @@
       </ion-segment>
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content class="card-title">
       <div [ngSwitch]="pet">
         <ion-list *ngSwitchCase="'login'">
           <form [formGroup]="onLoginForm" class="list-form">
-            <ion-item>
-              <ion-label floating color="dark2">
-                <ion-icon color="orange1" name="mail"></ion-icon>
+            <ion-item class="card-title">
+              <ion-label floating class="dark2">
+                <ion-icon name="mail"></ion-icon>
                 Email
               </ion-label>
               <ion-input [(ngModel)]="user.email" type="email" formControlName="email"></ion-input>
@@ -28,8 +28,8 @@
             <p no-margin ion-text color="danger1" class="text-1x has-error" *ngIf="onLoginForm.get('email').touched && onLoginForm.get('email').hasError('required')">&nbsp;&nbsp;&nbsp;This
               field is required</p>
 
-            <ion-item>
-              <ion-label floating color="dark2">
+            <ion-item class="card-title">
+              <ion-label floating class="dark2">
                 <ion-icon color="orange1" name="md-lock"></ion-icon>
                 Password
               </ion-label>
@@ -39,44 +39,40 @@
               field is required</p>
           </form>
 
-          <ion-item>
-            <p align='right'><a (click)=showPrompt()>
+          <ion-item class="card-title">
+            <p align='right'><a ion-text color="light2" (click)=showPrompt()>
                 <font size="1">Forgot Password?</font>
               </a></p>
           </ion-item>
-          
-          <button ion-button icon-start full color="danger2" round (click)=login(user) class="card-subtitle">
+
+          <button ion-button icon-start full color="secon" round (click)=login(user) class="card-subtitle">
             <ion-icon name="ios-log-in"></ion-icon>
             LOG IN
           </button>
-          <p><font size="1">Or Sign Up with</font></p> 
-          <ion-row no-padding>
-            &nbsp;
-            &nbsp;
-            <ion-col no-padding>
+          <p ion-text color="light2" class="padding-top">
+            <font size="1">Or Sign Up with</font>
+          </p>
+          <ion-row no-padding class="padding-top">
+            <ion-col col-6 no-padding>
               <button ion-button icon-start full color="facebook" class="md">
                 <ion-icon name="logo-facebook"></ion-icon>
                 facebook
               </button>
             </ion-col>
-            &nbsp;
-            &nbsp;
-            <ion-col no-padding>
+            <ion-col col-6 no-padding>
               <button ion-button icon-start full color="google">
                 <ion-icon name="logo-googleplus"></ion-icon>
                 google
               </button>
             </ion-col>
-            &nbsp;
-            &nbsp;
           </ion-row>
 
         </ion-list>
 
         <ion-list *ngSwitchCase="'Register'">
           <form [formGroup]="onRegisterForm" class="list-form">
-            <ion-item>
-              <ion-label floating color="dark2">
+            <ion-item class="card-title">
+              <ion-label floating>
                 <ion-icon name="md-person"></ion-icon>
                 User Name
               </ion-label>
@@ -85,8 +81,8 @@
             <p no-margin ion-text color="danger1" class="text-1x has-error" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">&nbsp;&nbsp;&nbsp;This
               field is required</p>
 
-            <ion-item>
-              <ion-label floating color="dark2">
+            <ion-item class="card-title">
+              <ion-label floating>
                 <ion-icon name="mail"></ion-icon>
                 Email
               </ion-label>
@@ -95,7 +91,7 @@
             <p no-margin ion-text color="danger1" class="text-1x has-error" *ngIf="onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')">&nbsp;&nbsp;&nbsp;This
               field is required</p>
 
-            <ion-item>
+            <ion-item class="card-title">
               <ion-label floating color="dark2">
                 <ion-icon name="md-lock"></ion-icon>
                 Password
@@ -105,12 +101,12 @@
             <p no-margin ion-text color="danger1" class="text-1x has-error" *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')">&nbsp;&nbsp;&nbsp;This
               field is required</p>
 
-            <ion-item>
+            <ion-item class="card-title">
               <ion-label floating color="dark2">
                 <ion-icon name="md-calendar"></ion-icon>
                 Enter Birth Day
               </ion-label>
-              <ion-datetime type="date" name="dob" [(ngModel)]="user.birthdate" displayFormat="DD-MM-YYYY"
+              <ion-datetime type="date" name="dob" [(ngModel)]="user.birth" displayFormat="DD-MM-YYYY"
                 formControlName="birthdate">
               </ion-datetime>
             </ion-item>
@@ -118,13 +114,13 @@
               field is required</p>
           </form>
 
-          <ion-item>
-            <p align='right'>
+          <ion-item class="card-title">
+            <p ion-text color="light2" align='right'>
               <font size="1">www.foodapp.com</font>
             </p>
           </ion-item>
 
-          <button ion-button icon-start full color="danger2" round (click)="register(user)" [disabled]="!onRegisterForm.valid">
+          <button ion-button icon-start full color="secon" round (click)="register(user)" [disabled]="!onRegisterForm.valid">
             <ion-icon name="person-add"></ion-icon>
             SING UP
           </button>

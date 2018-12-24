@@ -119,11 +119,18 @@
       </button>
     </div>
 
-    <button ion-button block color="secon" (click)="addRestaurant(restaurant)" [disabled]="!onYourRestaurantForm.valid">
+    <!-- <button ion-button block color="secon" (click)="addRestaurant(restaurant)" [disabled]="!onYourRestaurantForm.valid">
       <ion-icon name="cloud-upload"></ion-icon>
       &nbsp;
       + Restaurant
-    </button>
+    </button> -->
+
+    <div text-center>
+      <button center ion-button full round color="secon" (click)="addRestaurant(restaurant)" [disabled]="!onYourRestaurantForm.valid">
+        <ion-icon name="ios-cloud-upload-outline"></ion-icon>
+        &nbsp; Restaurant
+      </button>
+    </div>
     <br>
   </form>
 

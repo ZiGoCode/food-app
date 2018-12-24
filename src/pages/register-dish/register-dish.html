@@ -40,12 +40,12 @@
       <ion-item>
         <ion-label color="danger1" stacked>Dish Type:</ion-label>
         <ion-select [(ngModel)]="dish.type" placeholder="ประเภทเมนูอาหาร..." formControlName="dishtype">
-          <ion-option value="house">Pasta</ion-option>
-          <ion-option value="mansion">Pizza</ion-option>
-          <ion-option value="Apartment">Fast Food</ion-option>
-          <ion-option value="comroom">Street Food</ion-option>
-          <ion-option value="farm">Barbecue</ion-option>
-          <ion-option value="farm">Veggie</ion-option>
+          <ion-option value="Pasta">Pasta</ion-option>
+          <ion-option value="Pizza">Pizza</ion-option>
+          <ion-option value="Fast Food">Fast Food</ion-option>
+          <ion-option value="Street Food">Street Food</ion-option>
+          <ion-option value="Barbecue">Barbecue</ion-option>
+          <ion-option value="Veggie">Veggie</ion-option>
         </ion-select>
       </ion-item>
       <p ion-text color="danger" class="text-1x has-error" *ngIf="registerdish.get('dishtype').touched && registerdish.get('dishtype').hasError('required')">
@@ -91,14 +91,19 @@
       </button>
     </div>
 
-    <button ion-button block color="danger1" (click)="registerDish(dish)" [disabled]="!registerdish.valid">
+    <!-- <button ion-button block color="danger1" (click)="registerDish(dish)" [disabled]="!registerdish.valid">
       <ion-icon name="cloud-upload"></ion-icon>
       &nbsp;
       + Dishes
-    </button>
+    </button> -->
+
+    <div text-center>
+      <button center ion-button full round color="secon"  (click)="registerDish(dish)" [disabled]="!registerdish.valid">
+        <ion-icon name="ios-cloud-upload-outline"></ion-icon>
+        &nbsp; Dishes
+      </button>
+    </div>
     <br>
   </div>
-
-  <ion-item color="light">Dishes</ion-item>
 
 </ion-content>

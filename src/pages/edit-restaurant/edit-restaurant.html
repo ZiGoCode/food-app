@@ -6,8 +6,8 @@
       </button>
     </ion-buttons>
     <ion-title class="fontRSU">{{ restaurant.title }}</ion-title>
-    <ion-buttons end *ngFor="let item of items | async" >
-      <button ion-button icon-start color="" (click)="delete(item)">
+    <ion-buttons end>
+      <button ion-button icon-start color="" (click)="delete(restaurant)">
         <ion-icon name="md-trash"></ion-icon>
       </button>
     </ion-buttons>

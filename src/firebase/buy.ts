@@ -4,4 +4,5 @@ export interface Buy {
     type: string;
     ingredients: string;
     price: number;
+    number: number;
 }

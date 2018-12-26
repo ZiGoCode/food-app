@@ -8,9 +8,9 @@
         <ion-title>
             <span ion-text color="danger2">{{ restaurant.title }}</span>
         </ion-title>
-        <ion-buttons end (click)="onCart()">
+        <ion-buttons end class="buts-maging" (click)="onSave(restaurant)">
             <button ion-button color="danger2">
-                <ion-icon name="custom-cart"></ion-icon>
+                <ion-icon name="ios-bookmark"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>

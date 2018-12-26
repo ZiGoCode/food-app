@@ -8,9 +8,9 @@
         <ion-title>
             <span ion-text color="danger2">DishMenu</span>
         </ion-title>
-        <ion-buttons end>
-            <button ion-button color="danger2">
-                <ion-icon name="md-bookmark"></ion-icon>
+        <ion-buttons end class="buts-maging">
+            <button ion-button color="danger2" (click)="onCart()">
+                <ion-icon name="custom-cart"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -80,10 +80,10 @@
                 </div>
             </ion-col>
 
-            <ion-col col-3 class="col-footer3" (click)="onBuy()">
+            <ion-col col-3 class="col-footer3" (click)="onBuy(dishMenu)">
                 <div class="div-footer3">
                     <ion-icon name="custom-cart"></ion-icon>
-                    <br><span class="text-size">Buy</span>
+                    <br><span class="text-size">Buy Now</span>
                 </div>
             </ion-col>
 

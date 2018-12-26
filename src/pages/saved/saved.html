@@ -1,13 +1,48 @@
-
 <ion-header>
 
-  <ion-navbar color="danger2">
-    <ion-title>Saved</ion-title>
-  </ion-navbar>
+    <ion-navbar color="danger2">
+        <ion-title>Saved</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+    <ion-list no-lines>
+        <div *ngFor="let item of save | async">
+            <ion-item-sliding class="polaro" no-lines>
+                <ion-item class="bts-w">
+                    <div item-start class="div-imgbuy">
+                        <img src="../../assets/imgs/dishes/dish01m.jpg">
+                    </div>
+                    <div class="div-conten">
+                        <h3 ion-text color="danger4" class="fontRSU text-ag1">{{ item.title }}</h3>
+                        <p ion-text color="danger3" class="text-ag2">{{ item.type }}</p>
+                        <p class="text-ag2">
+                            <span ion-text color="dark2" class="fontRSU">จำนวน </span>
+                            <span ion-text color="dark2">{{ item.number }}</span>
+                            <span ion-text color="dark2" class="fontRSU"> {{ item.sub }},{{ item.district }},{{
+                                item.province }}</span>
+                        </p>
+                    </div>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger1">
+                        <ion-icon name="md-trash"></ion-icon>
+                        Delete
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+            <div class="item-size2"></div>
+        </div>
+    </ion-list>
+
+    <div class="div-notdata" text-center *ngIf="bass == 0">
+        <ion-icon class="icon-notdata" name="ios-help-circle"></ion-icon>
+        <br>
+        <samp ion-text color="dark3">No Information</samp>
+    </div>
+
 
 </ion-content>

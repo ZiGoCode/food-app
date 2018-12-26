@@ -26,9 +26,8 @@ export class MyApp {
             this.rootPage = 'TabsPage';
         } else {
             this.rootPage = 'LoginPage';
-
         }
-        screenOrientation.lock('portrait');
+        // this.screenOrientation.lock('portrait');
     }
 }
 

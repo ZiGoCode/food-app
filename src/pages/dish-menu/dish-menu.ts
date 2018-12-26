@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { Dish } from '../../firebase/dish';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -24,7 +24,8 @@ export class DishMenuPage {
         public navParams: NavParams,
         private toastCtrl: ToastController,
         private angularFireAuth: AngularFireAuth,
-        private angularFireDatabase: AngularFireDatabase) {
+        private angularFireDatabase: AngularFireDatabase,
+        public loadingCtrl: LoadingController) {
 
         this.dishMenu = this.navParams.get("item");
         this.cout = this.dishMenu.price;
@@ -36,6 +37,11 @@ export class DishMenuPage {
     }
 
     presentMenu(dishMenu: Dish) {
+        const loader = this.loadingCtrl.create({
+            content: "Please wait...",
+            spinner: 'crescent',
+        });
+        loader.present();
         let toast = this.toastCtrl.create({
             message: 'เพิ่มไปยังตะกร้าเมนูเรียบร้อยเเล้ว',
             duration: 3000,
@@ -45,20 +51,20 @@ export class DishMenuPage {
         toast.onDidDismiss(() => {
             console.log('Dismissed toast');
         });
-        console.log(dishMenu);
+        // console.log(dishMenu);
         this.angularFireAuth.authState.take(1).subscribe(data => {
-            dishMenu.price = this.cout
             const menu = {} as Buy;
             menu.title = this.dishMenu.title;
             menu.ingredients = this.dishMenu.ingredients;
             menu.type = this.dishMenu.type;
-            menu.price = this.dishMenu.price;
+            menu.price = Number(this.cout);
+            menu.number = Number(this.buy);
             this.angularFireDatabase.list(`buymenu/${data.uid}`).push(menu).then(() => {
+                loader.dismiss();
                 toast.present();
             });
         });
     }
-
 
     onAdd() {
         this.buy++
@@ -69,10 +75,44 @@ export class DishMenuPage {
             this.buy--
             this.cout -= this.baht;
         }
-
     }
-    onBuy() {
+
+    onBuy(dishMenu: Dish) {
+        const loader = this.loadingCtrl.create({
+            content: "Please wait...",
+            spinner: 'crescent',
+        });
+        loader.present();
+        let toast = this.toastCtrl.create({
+            message: 'เพิ่มไปยังตะกร้าเมนูเรียบร้อยเเล้ว',
+            duration: 3000,
+            position: 'top'
+        });
+
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        // console.log(dishMenu);
+        this.angularFireAuth.authState.take(1).subscribe(data => {
+            const menu = {} as Buy;
+            menu.title = this.dishMenu.title;
+            menu.ingredients = this.dishMenu.ingredients;
+            menu.type = this.dishMenu.type;
+            menu.price = Number(this.cout);
+            menu.number = Number(this.buy);
+            // console.log(this.buy);
+            
+            this.angularFireDatabase.list(`buymenu/${data.uid}`).push(menu).then(() => {
+                loader.dismiss();
+                this.navCtrl.push('BuyPage',{baht: menu.price});
+                toast.present();
+            });
+            // const baht = {} as Baht;
+            // baht.baht = this.dishMenu.price;
+            // this.angularFireDatabase.list(`baht/${data.uid}`).push(baht);
+        });
+    }
+    onCart(){
         this.navCtrl.push('BuyPage');
     }
-
 }

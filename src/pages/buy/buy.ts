@@ -107,6 +107,7 @@ export class BuyPage {
         });
         alert.present();
     }
+    
     showRadio() {
         let alert = this.alertCtrl.create();
         alert.setTitle('รหัสโต๊ะ');
@@ -134,7 +135,15 @@ export class BuyPage {
         alert.present();
     }
     onBuy() {
-        if (!this.keyTeble) {
+        if (this.bass == 0) {
+            const alert = this.alertCtrl.create({
+                title: 'แจ้งเตือน!',
+                subTitle: 'กรุณาเลือกเมนูอาหารก่อน',
+                buttons: ['OK']
+            });
+            alert.present();
+        }
+        else if (!this.keyTeble) {
             const alert = this.alertCtrl.create({
                 title: 'แจ้งเตือน!',
                 subTitle: 'กรุณาเลือกโต๊ะอาหาร',
@@ -168,14 +177,16 @@ export class BuyPage {
                     loader.present();
 
                     if (data == 'blue1') {
-                        loader.dismiss();
-                        this.navCtrl.push('MyOrdersPage');
+        
+                        this.navCtrl.push('MyOrdersPage', {item: 1});
                     }
                     if (data == 'blue2') {
-                        loader.dismiss();
+                        
                         this.navCtrl.push('CheckoutPage');
                     }
+                    loader.dismiss();
                 }
+                
             });
             alert.present();
         }

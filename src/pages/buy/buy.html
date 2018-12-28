@@ -44,6 +44,24 @@
             </ion-item-sliding>
             <div class="item-size2"></div>
         </div>
+        <div padding *ngIf="bass > 0">
+            <ion-card no-margin margin-vertical class="full-width">
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label stacked ion-text color="secon" class="text-al">
+                                    <span ion-text color="red">*</span>
+                                    <span ion-text class="fontRSU">หมายเหตุ</span>
+                                    <span class="fontRSU" ion-text color="dark">ส่วนประสมของหาอาร</span>
+                                </ion-label>
+                                <ion-textarea rows="3" type="text" ion-text color="dark"></ion-textarea>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </ion-card>
+        </div>
     </ion-list>
 
     <div class="div-notdata" text-center *ngIf="bass == 0">

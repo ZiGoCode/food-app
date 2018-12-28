@@ -34,7 +34,7 @@
         <span class="text-left">Cart</span>
     </ion-item>
 
-    <ion-item no-margin navPush="SavedPage" class="item-zex">
+    <ion-item no-margin (click)="savedPage()" class="item-zex">
         <ion-icon name="ios-bookmark" class="icon-20x"></ion-icon>
         <span class="text-left">Seved</span>
     </ion-item>
@@ -44,7 +44,7 @@
         <span class="text-left">Like Restaurant</span>
     </ion-item>
 
-    <ion-item no-margin navPush="MyOrdersPage" class="item-zex" no-lines>
+    <ion-item no-margin class="item-zex" no-lines (click)="onMyroder()">
         <ion-icon name="md-list-box" class="icon-20x"></ion-icon>
         <span class="text-left">My Orders</span>
     </ion-item>

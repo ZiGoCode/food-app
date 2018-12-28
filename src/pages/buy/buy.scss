@@ -111,4 +111,18 @@ page-buy {
     .div-conten{
         padding-left: 10px !important;
     }
+    .full-width {
+        width: 100% !important;
+    }
+    
+    .max-width {
+        max-width: 100% !important;
+    }
+    .text-al{
+        text-align: left;
+    }
+    ion-textarea { 
+        border-bottom: #00635a solid 1px;
+        caret-color: #00635a;
+    }  
 }

@@ -19,6 +19,7 @@ import { Observable } from 'rxjs';
 export class MyProfilePage {
 
     profileData: Observable<any>;
+    
 
     constructor(private angularFireAuth: AngularFireAuth,
         private angularFireDatabase: AngularFireDatabase,
@@ -29,7 +30,8 @@ export class MyProfilePage {
 
         this.angularFireAuth.authState.subscribe(data => {
             this.profileData = this.angularFireDatabase.object(`user/${data.uid}`).valueChanges();
-        })
+        });
+        
 
     }
 
@@ -62,11 +64,17 @@ export class MyProfilePage {
     }
 
     open() {
-        this.appCtrl.getRootNav().push('TabsRtrPage', {}, { animate: true, direction: 'back' });
+        this.appCtrl.getRootNav().push('TabsRtrPage', {idteb: 1}, { animate: true, direction: 'back' });
     }
 
     onCart() {
-        this.appCtrl.getRootNav().push('BuyPage', {}, { animate: true, direction: 'forward' })
+        this.appCtrl.getRootNav().push('BuyPage', {}, { animate: true, direction: 'forward' });
+    }
+    onMyroder() {
+        this.appCtrl.getRootNav().push('MyOrdersPage', {}, { animate: true, direction: 'forward' });
+    }
+    savedPage(){
+        this.navCtrl.push('SavedPage', {item: 1})
     }
 
 }

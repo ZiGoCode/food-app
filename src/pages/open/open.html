@@ -1,85 +1,68 @@
-<ion-header>
-
-  <ion-navbar color="secon">
-    <ion-title>Open</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <ion-row text-center text-wrap no-maegin no-padding class="polaroid1" (click)="registerRtrPage()">
-    <ion-col col-3>
-      <img class="img-bg" src="../../assets/imgs/icon.png">
-    </ion-col>
-    <ion-col col-6 class="danger4">
-      <h3 ion-text color="dark" class="text-ag1">Regiter Restaurant</h3>
-    </ion-col>
-    <ion-col col-2>
-      <button ion-button icon-start clear color="dark1">
-        <ion-icon name="md-document" class="icon-20x"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-
-  <ion-row text-center text-wrap no-maegin no-padding>
-    <ion-col col-12 no-maegin no-padding>
-      <div class="item-size1"></div>
-    </ion-col>
-  </ion-row>
-
-  <ion-row text-center text-wrap no-maegin no-padding class="polaroid1" (click)="registerDishPage()">
-    <ion-col col-3>
-      <img class="img-bg" src="../../assets/imgs/icon.png">
-    </ion-col>
-    <ion-col col-6 class="danger4">
-      <h3 ion-text color="dark" class="text-ag1">Regiter Dish</h3>
-    </ion-col>
-    <ion-col col-2>
-      <button ion-button icon-start clear color="dark1">
-        <ion-icon name="ios-clipboard" class="icon-20x"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-
-  <div class="item-size1"></div>
-
-  <ion-item no-margin class="item-zex" color="gold" no-lines>
-    <ion-icon name="ios-create" class="icon-22x"></ion-icon>
-    <span class="text-left"> Edit Restaurant</span>
-  </ion-item>
-
-  <ion-list no-lines>
-    <div class="item-size1"></div>
-    <div *ngFor="let item of items | async">
-      <ion-item-sliding class="polaroid1" no-lines>
-        <ion-item (click)="editR(item)">
-          <ion-thumbnail item-start>
-            <img src="../../assets/imgs/icon.png">
-          </ion-thumbnail>
-          <h3 ion-text color="danger4" class="fw700">{{ item.title }}</h3>
-          <p ion-text color="danger3" class="fw500">{{ item.type }}</p>
-          <p ion-text class="text-12x">{{ item.sub }},{{ item.district }},{{ item.province }}</p>
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button (click)="btedit(item)" class="bts-w" color="secondary1">
-            <ion-icon name="ios-checkbox"></ion-icon>
-            UP
-          </button>
-          <button ion-button (click)="btedit(item)" class="bts-w">
-            <ion-icon name="ios-create"></ion-icon>
-            Edit
-          </button>
-          <button ion-button color="danger1" (click)="deleteR(item)" class="bts-w">
-            <ion-icon name="md-trash"></ion-icon>
-            Delete
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
-      <div class="item-size2"></div>
+<ion-content class="content-bg">
+    <div class="div-header">
+        <div class="div-img1">
+            <img width="100px" height="100px" src="../../assets/imgs/foodicon.png" alt="">
+        </div>
+        <div class="div-img2">
+            <img width="190px" height="auto" src="../../assets/imgs/iconT2.png" alt="">
+        </div>
     </div>
-  </ion-list>
 
-  <!-- <div class="item-size"></div> -->
+    <div class="item-size1"></div>
 
+    <ion-row>
+
+        <ion-col class="size-0" col-4 (click)="registerRtrPage()">
+            <div class="div-bg">
+                <ion-icon name="custom-chef"></ion-icon>
+                <br>
+                <span class="text-size">Regiter <br> Restaurant</span>
+            </div>
+        </ion-col>
+
+        <ion-col class="size-0" col-4 (click)="registerDishPage()">
+            <div class="div-bg">
+                <ion-icon name="custom-tray"></ion-icon>
+                <br>
+                <span class="text-size">Regiter <br> Dish</span>
+            </div>
+        </ion-col>
+
+        <ion-col class="size-0" col-4>
+            <div class="div-bg">
+                <ion-icon name="custom-doc"></ion-icon>
+                <br>
+                <div class="texd-paddig"></div>
+                <span class="text-size">Document</span>
+            </div>
+        </ion-col>
+
+        <div class="div-bg1">
+            <div class="div-bg2">
+                <ion-icon name="ios-call"></ion-icon>
+            </div>
+            <div class="div-bg3">
+                <span class="text-size1">Tel.08637322289</span>
+            </div>
+        </div>
+
+        <div class="div2">
+            <div class="div-bg2">
+                <ion-icon name="ios-globe"></ion-icon>
+            </div>
+            <div class="div-bg3">
+                <span class="text-size1">www.foodapp.com</span>
+            </div>
+        </div>
+
+        <div class="div1">
+            <div class="div-bg2">
+                <ion-icon class="icon-size" name="custom-group"></ion-icon>
+            </div>
+            <div class="div-bg3">
+                <span class="text-size1">About us</span>
+            </div>
+        </div>
+
+    </ion-row>
 </ion-content>

@@ -19,6 +19,7 @@ import { Observable } from 'rxjs';
 export class MyProfilePage {
 
     profileData: Observable<any>;
+    qty: any;
     
 
     constructor(private angularFireAuth: AngularFireAuth,
@@ -31,12 +32,22 @@ export class MyProfilePage {
         this.angularFireAuth.authState.subscribe(data => {
             this.profileData = this.angularFireDatabase.object(`user/${data.uid}`).valueChanges();
         });
+        this.getBaht();
         
 
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad MyProfilePage');
+    }
+
+    getBaht() {
+        this.angularFireAuth.authState.take(1).subscribe(data => {
+            this.angularFireDatabase.list(`buymenu/${data.uid}`).valueChanges()
+                .subscribe(res => {
+                    this.qty = res.length;
+                })
+        });
     }
 
     logout() {

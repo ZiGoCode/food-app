@@ -12,6 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { FIREBASE_CONFIG } from '../firebase/firebase-config';
+import { Push } from '@ionic-native/push';
 
 
 
@@ -38,6 +39,7 @@ import { FIREBASE_CONFIG } from '../firebase/firebase-config';
     providers: [
         StatusBar,
         SplashScreen,
+        Push,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
         ScreenOrientation
     ]

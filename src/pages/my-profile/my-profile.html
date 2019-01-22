@@ -12,7 +12,9 @@
                 <img src="../../assets/imgs/default-user-image.png">
             </ion-avatar>
             <p>This is an image</p>
-            <h1><b>{{ (profileData | async)?.username }}</b></h1>
+            <div class="username">
+                <h1><b>{{ (profileData | async)?.username }}</b></h1>
+            </div>
         </ion-item>
     </div>
 
@@ -31,6 +33,7 @@
 
     <ion-item no-margin class="item-zex" (click)="onCart()">
         <ion-icon name="md-cart" class="icon-20x"></ion-icon>
+        <div *ngIf="qty" class="div-badge">{{qty}}</div>
         <span class="text-left">Cart</span>
     </ion-item>
 

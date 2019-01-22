@@ -1,8 +1,8 @@
 <ion-header no-border>
     <ion-navbar hideBackButton transparent class="navbar-bg">
         <ion-buttons start navPop>
-            <button ion-button icon-only icon-start color="danger2">
-                <ion-icon name="ios-arrow-back"></ion-icon>
+            <button ion-button icon-start color="danger2">
+                <ion-icon name="md-arrow-back"></ion-icon>
             </button>
         </ion-buttons>
         <ion-title>
@@ -10,7 +10,7 @@
         </ion-title>
         <ion-buttons end class="buts-maging" (click)="onSave(restaurant)">
             <button ion-button color="danger2">
-                <ion-icon name="ios-bookmark"></ion-icon>
+                <ion-icon class="icon-book" name="ios-bookmark"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
@@ -64,7 +64,9 @@
                                     ฿{{item.price}}
                                 </ion-col>
                                 <ion-col class="text-icon">
-                                    <ion-icon name="custom-cart"></ion-icon>
+                                    <div class="icon-col">
+                                        <ion-icon name="custom-cart"></ion-icon>
+                                    </div>
                                 </ion-col>
                             </ion-row>
                         </div>

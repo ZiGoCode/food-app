@@ -8,6 +8,11 @@
         <ion-title>
             <span ion-text>Buy</span>
         </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-start (click)="clickHome()">
+                <ion-icon name="md-home"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -55,7 +60,7 @@
                                     <span ion-text class="fontRSU">หมายเหตุ</span>
                                     <span class="fontRSU" ion-text color="dark">ส่วนประสมของหาอาร</span>
                                 </ion-label>
-                                <ion-textarea rows="3" type="text" ion-text color="dark"></ion-textarea>
+                                <ion-textarea [(ngModel)]="noteDish.note" rows="3" type="text" ion-text color="dark"></ion-textarea>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
@@ -97,7 +102,7 @@
                 </div>
             </ion-col>
 
-            <ion-col col-6 class="col-footer3" (click)="onBuy()">
+            <ion-col col-6 class="col-footer3" (click)="onBuy(noteDish)">
                 <div class="div-footer3">
                     <ion-icon name="ios-cash"></ion-icon>
                 </div>

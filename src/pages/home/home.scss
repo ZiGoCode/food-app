@@ -21,28 +21,28 @@ page-home {
   }
 
   .inner {
-    padding-top: 5px !important;
-    display: table-cell;
-    ion-card {
-      padding: 0 !important;
-      margin: 3px !important;
-      width: 100px !important;
-      height: 150px !important;
+        padding-top: 5px !important;
+        display: table-cell;
+        ion-card {
+            padding: 0 !important;
+            margin: 3px !important;
+            width: 100px !important;
+            height: 150px !important;
       // border: solid 1px #ccc;
     }
   }
 
-  .card-content {
-    text-align: center !important;
-    font-size: 12px !important;
-    width: 100% !important;
-    padding-top: 3px !important;
-    padding-left: 3px !important;
-    padding-right: 3px !important;
-  }
-  .div-padding {
-    padding: 3px;
-  }
+    .card-content {
+        text-align: center !important;
+        font-size: 12px !important;
+        width: 100% !important;
+        padding-top: 3px !important;
+        padding-left: 3px !important;
+        padding-right: 3px !important;
+    }
+    .div-padding {
+        padding: 3px;
+    }
   .padding-di{
     padding-top: !important;
   }

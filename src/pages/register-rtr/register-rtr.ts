@@ -10,139 +10,139 @@ import { Observable } from 'rxjs';
 
 @IonicPage()
 @Component({
-  selector: 'page-register-rtr',
-  templateUrl: 'register-rtr.html',
+    selector: 'page-register-rtr',
+    templateUrl: 'register-rtr.html',
 })
 export class RegisterRtrPage {
 
-  public onYourRestaurantForm: FormGroup;
+    public onYourRestaurantForm: FormGroup;
 
-  restaurant = {} as Restaurant;
-  restaurantData: Observable<any>;
-  items: Observable<any[]>;
+    restaurant = {} as Restaurant;
+    restaurantData: Observable<any>;
+    items: Observable<any[]>;
 
-  itemsID: Observable<any>;
-
-
-
-  constructor(private angularFireAuth: AngularFireAuth,
-    private angularFireDatabase: AngularFireDatabase,
-    public loadingCtrl: LoadingController,
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private _fb: FormBuilder,
-    public actionsheetCtrl: ActionSheetController,
-    public appCtrl: App) {
+    itemsID: Observable<any>;
 
 
 
-    this.angularFireAuth.authState.take(1).subscribe(data => {
-      // this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).valueChanges();
-      this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).snapshotChanges().map(caches => {
-        return caches.map(c => ({
-          key: c.payload.key, ...c.payload.val()
-        }));
-      });
-    });
+    constructor(private angularFireAuth: AngularFireAuth,
+        private angularFireDatabase: AngularFireDatabase,
+        public loadingCtrl: LoadingController,
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private _fb: FormBuilder,
+        public actionsheetCtrl: ActionSheetController,
+        public appCtrl: App) {
 
-    this.itemsID = this.angularFireDatabase.list("restaurant/").snapshotChanges().map(caches => {
-      return caches.map(c => ({
-        key: c.payload.key, ...c.payload.val()
-      }));
-    });
 
-    //this.items = this.angularFireDatabase.list("/restaurant/").valueChanges();
 
-  }
+        this.angularFireAuth.authState.take(1).subscribe(data => {
+            // this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).valueChanges();
+            this.items = this.angularFireDatabase.list(`restaurantID/${data.uid}`).snapshotChanges().map(caches => {
+                return caches.map(c => ({
+                    key: c.payload.key, ...c.payload.val()
+                }));
+            });
+        });
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterRtrPage');
-  }
+        this.itemsID = this.angularFireDatabase.list("restaurant/").snapshotChanges().map(caches => {
+            return caches.map(c => ({
+                key: c.payload.key, ...c.payload.val()
+            }));
+        });
 
-  ngOnInit() {
-    this.onYourRestaurantForm = this._fb.group({
-      profiledata: [true, Validators.compose([Validators.required])],
-      restaurantTitle: ['', Validators.compose([Validators.required])],
-      restaurantAddress: ['', Validators.compose([Validators.required])],
-      restaurantType: ['', Validators.compose([Validators.required])],
-      restaurantRoad: ['', Validators.compose([Validators.required])],
-      restaurantSub: ['', Validators.compose([Validators.required])],
-      restaurantDistrict: ['', Validators.compose([Validators.required])],
-      restaurantProvince: ['', Validators.compose([Validators.required])],
-      restaurantPostal: ['', Validators.compose([Validators.required])]
-    });
-  }
+        //this.items = this.angularFireDatabase.list("/restaurant/").valueChanges();
 
-  addRestaurant(restaurant: Restaurant) {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      spinner: 'crescent',
-    });
-    loader.present();
-    // this.angularFireDatabase.list("/restaurant/").push(restaurant);
-    this.angularFireAuth.authState.take(1).subscribe(data => {
-      // this.angularFireDatabase.list("/restaurant/").push(restaurant);
-      this.angularFireDatabase.list(`restaurantID/${data.uid}`).push(restaurant).then(() => {
-        this.navCtrl.pop();
-      });
-    });
-    loader.dismiss();
-  }
+    }
 
-  btedit(item) {
-    this.navCtrl.push('EditRestaurantPage', { item: item })
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad RegisterRtrPage');
+    }
 
-  editR(item) {
+    ngOnInit() {
+        this.onYourRestaurantForm = this._fb.group({
+            profiledata: [true, Validators.compose([Validators.required])],
+            restaurantTitle: ['', Validators.compose([Validators.required])],
+            restaurantAddress: ['', Validators.compose([Validators.required])],
+            restaurantType: ['', Validators.compose([Validators.required])],
+            restaurantRoad: ['', Validators.compose([Validators.required])],
+            restaurantSub: ['', Validators.compose([Validators.required])],
+            restaurantDistrict: ['', Validators.compose([Validators.required])],
+            restaurantProvince: ['', Validators.compose([Validators.required])],
+            restaurantPostal: ['', Validators.compose([Validators.required])]
+        });
+    }
 
-    const actionSheet = this.actionsheetCtrl.create({
-      title: 'Modify your Restaurant',
-      buttons: [
-        {
-          text: 'Up the Restaurant to FOODAPP',
-          handler: () => {
-            console.log('...');
-          }
-        }, {
-          text: 'Edit',
-          handler: () => {
-            this.navCtrl.push('EditRestaurantPage', { item: item })
-          }
-        },
-        {
-          text: 'Delete',
-          role: 'destructive',
-          handler: () => {
-            this.angularFireAuth.authState.take(1).subscribe(data => {
-              this.angularFireDatabase.list(`restaurant/`).remove(item.key);
-              this.angularFireDatabase.list(`restaurantID/${data.uid}`).remove(item.key);
-              // this.angularFireDatabase.list(`restaurant/`).remove(item.key);
-            })
-          }
-        }, {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
+    addRestaurant(restaurant: Restaurant) {
+        const loader = this.loadingCtrl.create({
+            content: "Please wait...",
+            spinner: 'crescent',
+        });
+        loader.present();
 
-  // this.navCtrl.push('EditRestaurantPage', {rtrID: item.key})
+        this.angularFireAuth.authState.take(1).subscribe(data => {
+            restaurant.id = data.uid;
+            this.angularFireDatabase.list(`restaurantID/${data.uid}`).push(restaurant).then(() => {
+                this.navCtrl.pop();
+            });
+        });
+        loader.dismiss();
+    }
 
-  deleteR(item) {
-    this.angularFireAuth.authState.take(1).subscribe(data => {
-      this.angularFireDatabase.list(`restaurant/`).remove(item.key);
-      this.angularFireDatabase.list(`restaurantID/${data.uid}`).remove(item.key);
-      // this.angularFireDatabase.list(`restaurant/`).remove(item.key);
-    })
-  }
+    btedit(item) {
+        this.navCtrl.push('EditRestaurantPage', { item: item })
+    }
 
-  onPop(){
-    this.appCtrl.getRootNav().pop({ animate: true, direction: '' });
-  }
+    editR(item) {
+
+        const actionSheet = this.actionsheetCtrl.create({
+            title: 'Modify your Restaurant',
+            buttons: [
+                {
+                    text: 'Up the Restaurant to FOODAPP',
+                    handler: () => {
+                        console.log('...');
+                    }
+                }, {
+                    text: 'Edit',
+                    handler: () => {
+                        this.navCtrl.push('EditRestaurantPage', { item: item })
+                    }
+                },
+                {
+                    text: 'Delete',
+                    role: 'destructive',
+                    handler: () => {
+                        this.angularFireAuth.authState.take(1).subscribe(data => {
+                            this.angularFireDatabase.list(`restaurant/`).remove(item.key);
+                            this.angularFireDatabase.list(`restaurantID/${data.uid}`).remove(item.key);
+                            // this.angularFireDatabase.list(`restaurant/`).remove(item.key);
+                        })
+                    }
+                }, {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ]
+        });
+        actionSheet.present();
+    }
+
+    // this.navCtrl.push('EditRestaurantPage', {rtrID: item.key})
+
+    deleteR(item) {
+        this.angularFireAuth.authState.take(1).subscribe(data => {
+            this.angularFireDatabase.list(`restaurant/`).remove(item.key);
+            this.angularFireDatabase.list(`restaurantID/${data.uid}`).remove(item.key);
+            // this.angularFireDatabase.list(`restaurant/`).remove(item.key);
+        })
+    }
+
+    onPop() {
+        this.appCtrl.getRootNav().pop({ animate: true, direction: '' });
+    }
 
 }

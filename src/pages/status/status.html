@@ -19,41 +19,23 @@
         </span>
     </ion-item>
 
-    <!-- <div class="div-statis">
-        <ion-row no-margin>
-            <ion-col col-2 class="col-size">
-                <div class="div-icon">
-                    <ion-icon color="danger2" name="md-radio-button-on"></ion-icon>
-                </div>
-                <div class="div-line" style="background-color:#ff6600;"></div>
+    <div *ngFor="let item of itemMyOrder | async" class="div-content">
+        <ion-row>
+            <ion-col col-1>
+                <div class="div-line1" style="background-color:#d3d3d3;"></div>
+                <ion-icon color="{{ item.color }}" name="md-radio-button-on"></ion-icon>
+                <div class="div-line" style="background-color:#d3d3d3;"></div>
             </ion-col>
 
-            <ion-col col-10 class="col-size-text">
-                <div class="text">
-                    ทำการสั่งซื้อ
-                    <br>
-                    {{ tomorrow }}
-                </div>
-            </ion-col>
-        </ion-row>
-    </div> -->
+            <ion-col col-11 class="text-a">
+                <span>
+                    <span ion-text color="{{ item.color }}" class="font-14">{{ item.status }}</span>
+                </span>
+                <br>
+                <span>
+                    <span ion-text class="font-12">{{ item.date }}</span>
+                </span>
 
-    <div class="div-statis">
-        <ion-row no-margin>
-            <ion-col col-2 class="col-size">
-                <div *ngIf="datenum == 1" class="div-line1" style="background-color:#ff6600;"></div>
-                <div class="div-icon">
-                    <ion-icon color="danger2" name="md-radio-button-on"></ion-icon>
-                </div>
-                <div class="div-line" style="background-color:#ff6600;"></div>
-            </ion-col>
-
-            <ion-col col-10 class="col-size-text">
-                <div class="text">
-                    ได้รับรู้การสั่งซื้อ
-                    <br>
-                    {{ tomorrow }}
-                </div>
             </ion-col>
         </ion-row>
     </div>

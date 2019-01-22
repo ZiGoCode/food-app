@@ -49,7 +49,7 @@ export class DishPage {
         console.log("ionViewDidLoad DishPage");
     }
     onDish(item) {
-        this.navCtrl.push('DishMenuPage', { item: item });
+        this.navCtrl.push('DishMenuPage', { item: item, itemid: item.id });
     }
     onCart() {
         this.navCtrl.push('BuyPage')

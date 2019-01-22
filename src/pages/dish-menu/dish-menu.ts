@@ -19,6 +19,7 @@ export class DishMenuPage {
     dishMenu = {} as Dish;
     baht: number;
     items: Observable<any[]>;
+    dishMenuID: any;
 
     constructor(public navCtrl: NavController,
         public navParams: NavParams,
@@ -28,6 +29,8 @@ export class DishMenuPage {
         public loadingCtrl: LoadingController) {
 
         this.dishMenu = this.navParams.get("item");
+        this.dishMenuID = this.navParams.get("itemid");
+        console.log(this.dishMenuID);
         this.cout = this.dishMenu.price;
         this.baht = this.dishMenu.price;
     }
@@ -51,15 +54,19 @@ export class DishMenuPage {
         toast.onDidDismiss(() => {
             console.log('Dismissed toast');
         });
-        // console.log(dishMenu);
+
         this.angularFireAuth.authState.take(1).subscribe(data => {
             const menu = {} as Buy;
+            menu.id = this.dishMenu.id;
+            menu.keyID = this.dishMenu.idrt;
             menu.title = this.dishMenu.title;
             menu.ingredients = this.dishMenu.ingredients;
             menu.type = this.dishMenu.type;
             menu.price = Number(this.cout);
             menu.number = Number(this.buy);
+            console.log('ข้อมูล', menu.id);
             this.angularFireDatabase.list(`buymenu/${data.uid}`).push(menu).then(() => {
+                // this.angularFireDatabase.list(`buymenuid/${this.dishMenu.idrt}/menu`).push(menu)
                 loader.dismiss();
                 toast.present();
             });
@@ -95,16 +102,19 @@ export class DishMenuPage {
         // console.log(dishMenu);
         this.angularFireAuth.authState.take(1).subscribe(data => {
             const menu = {} as Buy;
+            menu.id = this.dishMenu.id;
+            menu.keyID = this.dishMenu.idrt;
             menu.title = this.dishMenu.title;
             menu.ingredients = this.dishMenu.ingredients;
             menu.type = this.dishMenu.type;
             menu.price = Number(this.cout);
             menu.number = Number(this.buy);
             // console.log(this.buy);
-            
+
             this.angularFireDatabase.list(`buymenu/${data.uid}`).push(menu).then(() => {
+                // this.angularFireDatabase.list(`buymenuid/${this.dishMenu.idrt}/menu`).push(menu);
                 loader.dismiss();
-                this.navCtrl.push('BuyPage',{baht: menu.price});
+                this.navCtrl.push('BuyPage', { baht: menu.price });
                 toast.present();
             });
             // const baht = {} as Baht;
@@ -112,7 +122,7 @@ export class DishMenuPage {
             // this.angularFireDatabase.list(`baht/${data.uid}`).push(baht);
         });
     }
-    onCart(){
+    onCart() {
         this.navCtrl.push('BuyPage');
     }
 }

@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 
 import { ViewChild } from '@angular/core';
 import { Content } from 'ionic-angular';
+import { Baht } from '../../firebase/baht';
+import { Status } from '../../firebase/status';
+import { Buy } from '../../firebase/buy';
 
 @IonicPage()
 @Component({
@@ -26,6 +29,15 @@ export class BuyPage {
     dishBaht: any;
     numberdis: number;
     bass: number;
+    keyidJ: any;
+    keyid = new Array();
+    dishdeteil = new Array();
+    oderid: number;
+    cout: any;
+    cout1: any;
+    noteDish = {} as Baht;
+    dishMenu: Buy[] = [];
+    noteng: string;
 
 
 
@@ -47,11 +59,15 @@ export class BuyPage {
                 });
         });
         this.getBaht();
+        this.noteDish.note = '';
+
+        console.log('---', this.dishMenu);
+
     }
 
 
     ionViewDidLoad() {
-        // console.log(this.dis);
+        // console.log(this.dishdeteil);
     }
 
     getBaht() {
@@ -61,18 +77,35 @@ export class BuyPage {
                     this.bass = res.length;
                     for (let i = 0; i < res.length; i++) {
                         this.dis = (res[i]);
+                        this.dishMenu.push(this.dis);
+                        this.dishdeteil[i] = (res[i]);
                         this.dishBaht = JSON.stringify(this.dis.price);
                         this.numberdis = Number(this.dishBaht);
-                        console.log(this.numberdis);
+                        this.keyidJ = this.dis.keyID;
+                        console.log(this.keyidJ);
                         this.numbers.push(this.numberdis)
-                        console.log(this.numbers);
                     }
                     for (let i = 0; i < this.numbers.length; i++) {
                         this.element += this.numbers[i];
-                        console.log(this.element);
                     }
-                })
+                });
         });
+    }
+
+    getOder() {
+        this.angularFireDatabase.list(`buymenuid/${this.keyidJ}/menu/`).valueChanges()
+            .subscribe(res => {
+                console.log('length', res.length);
+                if (res.length == 0) {
+                    return
+                } else {
+                    this.cout = res.length;
+                }
+            });
+    }
+
+    ranbom(min_val, max_val) {
+        return Math.floor(Math.random() * Math.floor(max_val - min_val + 1)) + min_val;
     }
 
     delete(item) {
@@ -98,6 +131,7 @@ export class BuyPage {
                                 .list(`buymenu/${data.uid}`)
                                 .remove(item.key);
                             this.numbers.length = 0;
+                            this.dishMenu.length = 0
                             this.element = 0;
                         });
                         loader.dismiss();
@@ -107,7 +141,7 @@ export class BuyPage {
         });
         alert.present();
     }
-    
+
     showRadio() {
         let alert = this.alertCtrl.create();
         alert.setTitle('รหัสโต๊ะ');
@@ -134,7 +168,12 @@ export class BuyPage {
         });
         alert.present();
     }
-    onBuy() {
+
+    clickHome(){
+        this.navCtrl.setRoot('TabsPage');
+    }
+
+    onBuy(noteDish : Baht) {
         if (this.bass == 0) {
             const alert = this.alertCtrl.create({
                 title: 'แจ้งเตือน!',
@@ -177,16 +216,55 @@ export class BuyPage {
                     loader.present();
 
                     if (data == 'blue1') {
-        
-                        this.navCtrl.push('MyOrdersPage', {item: 1});
+                        const loader = this.loadingCtrl.create({
+                            content: "Please wait...",
+                            spinner: 'crescent',
+                        });
+                        loader.present();
+
+                        const status = {} as Baht;
+                        const statu = {} as Status;
+                        // status.oder = 1;
+                        // status.oder = this.cout;
+                        status.keyteble = this.keyTeble;
+                        status.note = noteDish.note;
+                        status.baht = this.element;
+                        status.status = 'รอดำเนินการ';
+                        status.number = this.ranbom(1000000, 9999999);
+                        status.date = new Date().toLocaleString();
+                        status.ioconcolor = 'danger5';
+                        statu.date = new Date().toLocaleString();
+                        statu.status = 'รอดำเนินการ';
+                        statu.color = 'danger5';
+                        statu.line = '#ffffff'
+                        // this.navCtrl.push('MyOrdersPage', {item: 1});
+
+                        this.angularFireAuth.authState.take(1).subscribe(data => {
+                            status.keyuser = data.uid;
+                            this.angularFireDatabase.list(`myoder/${data.uid}/menu`).push(status).then(id => {
+                                this.angularFireDatabase.object(`myoder/${data.uid}/menu/${id.key}/dish`).set(this.dishMenu);
+                                this.angularFireDatabase.list(`myoder/${data.uid}/menu/${id.key}/statu`).push(statu);
+                                status.idoder = id.key;
+                                this.angularFireDatabase.list(`buymenuid/${this.keyidJ}/menu`).push(status).then(datar => {
+                                    this.angularFireDatabase.object(`buymenuid/${this.keyidJ}/menu/${datar.key}/dish`).set(this.dishMenu);
+                                });
+                                console.log(status.idoder);
+                            });
+                            // this.angularFireDatabase.list(`buymenuid/${this.keyidJ}/menu`).push(status).then(datar => {
+                            //     this.angularFireDatabase.list(`buymenuid/${this.keyidJ}/menu/${datar.key}/dish`).push(this.dis);
+                            // });
+                        });
+
+                        this.navCtrl.push('MyOrdersPage', { item: 1 });
+                        loader.dismiss();
                     }
                     if (data == 'blue2') {
-                        
+
                         this.navCtrl.push('CheckoutPage');
                     }
                     loader.dismiss();
                 }
-                
+
             });
             alert.present();
         }
